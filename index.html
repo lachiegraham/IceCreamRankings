@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<head>
+    <title>Lachie Graham's Chocolate Milk Rankings</title>
+    <style>
+        .listContainer {
+            padding: 0 calc(5vw); /* 5% view width padding */
+            display: flex; /* Use flexbox for horizontal layout */
+            justify-content: center;
+            gap: 20px; /* Space between images */
+            flex-wrap: wrap;
+        }
+        .image-container {
+            display: flex;
+            flex-direction: column; /* Stack image and text vertically */
+            align-items: center; /* Center text below image */
+            text-align: center; /* Center text within its container */
+            position: relative; /* Needed for absolute positioning of the overlay */
+        }
+        .image-wrapper {
+            cursor: pointer; /* Indicate that the container is clickable */
+            position: relative; /* Needed for absolute positioning of the overlay within */
+        }
+        .image-container img {
+            max-width: 200px; /* Adjust image size as needed */
+            height: auto;
+            display: block; /* Prevent extra space below inline elements */
+        }
+        .image-container p.image-title {
+            max-width: 200px;
+            margin-top: 10px; /* Space between image and text */
+        }
+        .description-overlay { /* CLICK ON IMAGE, SHOW TEXT*/
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0; /* Initially hidden */
+            transition: opacity 0.3s ease; /* Smooth fade-in/out */
+            text-align: center;
+            padding: 10px;
+            box-sizing: border-box; /* Include padding in width and height */
+        }
+        .description-overlay p {
+            max-width: 90%; /* Limit text width within the overlay */
+        }
+        .image-wrapper.active .description-overlay {
+            opacity: 1; /* Show the overlay when the container is active */
+        }
+
+
+
+        .logo {
+            border: 20px outset rgb(255, 201, 65);
+        }
+        h1 {
+            font-family: Impact;
+            font-size: 40px;
+            text-align: center;
+            padding: 0 0;
+        }
+        h2 {
+            font-size: 25px;
+            text-align: center;
+        }
+        h3 {
+            font-size: 10px;
+            text-align: center;
+            padding: 0 0;
+        }
+        .subtitle {
+            text-align: center;
+        }
+        a {
+            color: blue;
+            font-family: verdana;
+        }
+        a:hover {
+            color: blueviolet;
+            font-family: verdana;
+        }
+        button {
+            font-size: larger;
+            color: rgb(60, 60, 60);
+        }
+        button:disabled {
+            color: rgb(180, 180, 180);
+        }
+        .hidden {
+            display: none;
+        }
+
+    </style>
+</head>
+
+<!-- https://www.reddit.com/r/anchorage/comments/1cqxha4/the_chocolate_milk_situation/ -->
+
+<body>
+<div class="logo">
+<h1>Lachie Graham's</h1>
+<h3>Very Official</h3>
+<h1>Chocolate Milk Ranking Website</h1>
+</div>
+<!-- <h2>"My opinion is fact and should be treated as such"</h2> -->
+ <h2 id="button-group">Filter options
+<button type="button" onclick="setButton(this, 'all')" disabled="true">All</button>
+<button type="button" onclick="setButton(this, 'limited-edition')">Limited Editions</button>
+<button type="button" onclick="setButton(this, 'chocolate')">Chocolate</button>
+<button type="button" onclick="setButton(this, 'australia')">Australian</button>
+<button type="button" onclick="setButton(this, 'international')">International</button>
+</h2>
+<h4 class="subtitle">(Click on the images to see my opinions)</h4>
+<script>
+function setButton(clickedButton, filter) {
+    const buttons = document.querySelectorAll('#button-group button');
+    const milks = document.querySelectorAll('.image-container')
+    
+    // filter
+    milks.forEach(milk => {
+        const milkFilters = milk.dataset.filters;
+
+        if (filter === 'all') {
+            milk.classList.remove('hidden');
+        } else if (milkFilters.includes(filter)) {
+            milk.classList.remove('hidden');
+        } else {
+            milk.classList.add('hidden');
+        }
+    });
+
+    // set button clicked to disabled, all others enabled
+    buttons.forEach(button => {
+        if (button === clickedButton) {
+            button.disabled = true;
+        } else {
+            button.disabled = false;
+        }
+    });
+}
+// could technically put all the above stuff in here
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle clicking on images => toggle description
+    const imageWrappers = document.querySelectorAll('.image-wrapper');
+    imageWrappers.forEach(container => {
+        container.addEventListener('click', function() {
+            this.classList.toggle('active');
+        });
+    });
+});
+</script>
+
+<!-- Main chunk of stuff -->
+<h2>Hall of Fame</h2>
+<!-- <p class="subtitle"><a target="_blank" href="https://www.nzherald.co.nz/resizer/v2/K6UFMT5CIY5KMMYY5COK3ZZ36E.jpg?auth=49288b72b7b843054b61bcabaa7c5363bea6f99eac37699c97eb0ce7e2659c6b&width=1440&height=810&quality=70&smart=true">
+    Me when</a></p> -->
+<p class="subtitle">These are the best of the best</p>
+<div class="listContainer">
+    <div class="image-container" data-filters="limited-edition australia">
+        <div class="image-wrapper">
+            <img src="brownes_gold.jpg" alt="Brownes Dairy Gold">
+            <div class="description-overlay"><p>My all-time favourite. Unfortunately discontinued. Sold 2022-ish.</p></div>
+        </div>
+        <p class="image-title">Brownes Dairy<br>'Gold'</p>
+    </div>
+    <div class="image-container" data-filters="chocolate international">
+        <div class="image-wrapper">
+            <img src="puhoi_choc.jpg" alt="Puhoi Valley Chocolate">
+            <div class="description-overlay"><p>There are two chocolate milks in New Zealand that are debated to be 'the best'. I don't remember trying the other one (Lewis Road Creamery), so this one is my winner.</p></div>
+        </div>
+        <p class="image-title">Puhoi Valley<br>'Real Chocolate'</p>
+    </div>
+    <div class="image-container" data-filters="chocolate australia">
+        <div class="image-wrapper">
+            <img src="oak_choc.jpg" alt="OAK Chocolate">
+            <div class="description-overlay"><p>Not much to say they just nailed this one.</p></div>
+        </div>
+        <p class="image-title">OAK<br>'Chocolate'</p>
+    </div>
+    <div class="image-container" data-filters="limited-edition australia">
+        <div class="image-wrapper">
+            <img src="oak_chocmint.jpg" alt="OAK Choc Mint">
+            <div class="description-overlay"><p>A special edition for Christmas 2022, rereleased a year later with normal packaging. Discontinued in 2024. The colder this one was, the better it tasted.</p></div>
+        </div>
+        <p class="image-title">OAK<br>'Choc Mint'</p>
+    </div>
+    <div class="image-container" data-filters="chocolate australia">
+        <div class="image-wrapper">
+            <img src="norco_choc.jpg" alt="Norco Chocolate">
+            <div class="description-overlay"><p>A bit different taste and texture wise to OAK, but just as good. Slightly harder to find though.</p></div>
+        </div>
+        <p class="image-title">Norco<br>'Chocolate'</p>
+    </div>
+    <div class="image-container" data-filters="chocolate australia">
+        <div class="image-wrapper">
+            <img src="bethune_lane_choc.png" alt="Bethune Lane Dairy">
+            <div class="description-overlay"><p>Found this one at a Woolies in rural Victoria. Only 2 ingredient: milk, and Belgian chocolate. A little lacking in the strength department, but man did it taste good.</p></div>
+        </div>
+        <p class="image-title">Bethune Lane Dairy<br>'Belgian Chocolate + Milk'</p>
+    </div>
+</div>
+
+<h2>Good</h2>
+<p class="subtitle">These get my seal of approval.</p>
+<div class="listContainer">
+    <div class="image-container" data-filters="chocolate australia">
+        <div class="image-wrapper">
+            <img src="nedds_choc.jpg" alt="Nedd's Choccy Milk">
+            <div class="description-overlay"><p>Nedd makes a good milk. A little expensive compared to others, and doesn't go on special that often.</p></div>
+        </div>
+        <p class="image-title">Nedd's<br>'Choccy Milk'</p>
+    </div>
+    <div class="image-container" data-filters="australia">
+        <div class="image-wrapper">
+            <img src="rokeby_vanilla.jpg" alt="Rokeby Vanilla">
+            <div class="description-overlay"><p>My go-to for high protein flavoured milk.</p></div>
+        </div>
+        <p class="image-title">Rokeby<br>'Vanilla Wafer'</p>
+    </div>
+    <div class="image-container" data-filters="chocolate australia">
+        <div class="image-wrapper">
+            <img src="bigm_choc.jpg" alt="Big M Chocolate">
+            <div class="description-overlay"><p>I'm always surprised by how good this one is. I expect it to taste cheap, but nah it's good.</p></div>
+        </div>
+        <p class="image-title">Big M<br>'Original Chocolate'</p>
+    </div>
+    <div class="image-container" data-filters="australia">
+        <div class="image-wrapper">
+            <img src="rokeby_choc_honeycomb.jpg" alt="Rokeby Choc Honeycomb">
+            <div class="description-overlay"><p>I don't know why this one is so much better than the normal Rokeby Chocolate, but it is.</p></div>
+        </div>
+        <p class="image-title">Rokeby<br>'Choc Honeycomb'</p>
+    </div>
+    <div class="image-container" data-filters="australia">
+        <div class="image-wrapper">
+            <img src="classic_strawberry.jpg" alt="Classic Strawberry">
+            <div class="description-overlay"><p>The best strawberry flavoured milk.</p></div>
+        </div>
+        <p class="image-title">Dairy Farmers<br>'Classic Strawberry'</p>
+    </div>
+    <div class="image-container" data-filters="limited-edition australia">
+        <div class="image-wrapper">
+            <img src="oak_milkybar.jpg" alt="Oak Milkybar">
+            <div class="description-overlay"><p>I'm a big fan of milkybar chocolate, so a little dissapointed this isn't ranking higher. Flavour is fine, just not strong enough.</p></div>
+        </div>
+        <p class="image-title">OAK<br>'Milkybar'</p>
+    </div>
+    <div class="image-container" data-filters="chocolate international">
+        <div class="image-wrapper">
+            <img src="darigold_oldfashioned.jpg" alt="Dairgold Old Fashioned">
+            <div class="description-overlay"><p>The best chocolate milk I found in Hawaii. Wish it were full cream milk. Why do they always have to be healthy man.</p></div>
+        </div>
+        <p class="image-title">Darigold<br>'Old Fashioned Chocolate'</p>
+    </div>
+    <div class="image-container" data-filters="chocolate international">
+        <div class="image-wrapper">
+            <img src="magnolia_choc.jpeg" alt="Magnolia Chocolate">
+            <div class="description-overlay"><p>Singapore's best normal chocolate.</p></div>
+        </div>
+        <p class="image-title">Magnolia<br>'Chocolate'</p>
+    </div>
+    <div class="image-container" data-filters="limited-edition international">
+        <div class="image-wrapper">
+            <img src="magnolia_cookiesandcream.webp" alt="Magnolia Cookies & Cream">
+            <div class="description-overlay"><p>Singapore. The thing with cookies and cream icecream is that it's just a cream flavoured icecream with cookie pieces. You can't get that same effect in a chocolate milk. So you're left with a cream flavoured milk.</p></div>
+        </div>
+        <p class="image-title">Magnolia<br>'Cookies & Cream'</p>
+    </div>
+    <div class="image-container" data-filters="limited-edition australia">
+        <div class="image-wrapper">
+            <img src="oak_violet_crumble.jpg" alt="OAK Violet Crumble">
+            <div class="description-overlay"><p>Discontinued. Was pretty good.</p></div>
+        </div>
+        <p class="image-title">OAK<br>'Violet Crumble'</p>
+    </div>
+    <div class="image-container" data-filters="limited-edition australia">
+        <div class="image-wrapper">
+            <img src="Classic_creaming_soda.jpg" alt="Classic Creaming Soda">
+            <div class="description-overlay"><p>A weird one. Tasted good though. But yeah, weird.</p></div>
+        </div>
+        <p class="image-title">Dairy Farmers<br>'Classic Creaming Soda'</p>
+    </div>
+    <div class="image-container" data-filters="limited-edition australia">
+        <div class="image-wrapper">
+            <img src="oak_rainbow.jpg" alt="OAK Painbow Paddle Pop">
+            <div class="description-overlay"><p>"Surprisingly tastes exactly like the rainbow paddle pop. Tastes good." - a text I sent to my brother</p></div>
+        </div>
+        <p class="image-title">OAK<br>'Paddle Pop Rainbow'</p> 
+    </div>
+    <div class="image-container" data-filters="limited-edition australia">
+        <div class="image-wrapper">
+            <img src="breaka_chupachups.jpg" alt="Chupa Chups Choco Vanilla">
+            <div class="description-overlay"><p>Tasted like a milkshake. Like the kind of thing you'd get from a cafe. Pretty cool.</p></div>
+        </div>
+        <p class="image-title">Breaka<br>'Chupa Chups Choco & Vanilla'</p>
+    </div>
+    <div class="image-container" data-filters="chocolate australia">
+        <div class="image-wrapper">
+            <img src="greatoceanroad_choc.jpg" alt="Great Ocean Road Chocolate">
+            <div class="description-overlay"><p>Tastes like milk + cocoa powder + sugar. And you might say "isn't that what all chocolate milks taste like?" <br>No. Just this one.</p></div>
+        </div>
+        <p class="image-title">Great Ocean Road<br>'Chocolate'</p>
+    </div>
+</div>
+
+<h2>Mid</h2>
+<p class="subtitle">I would only buy these if the good ones are sold out.</p>
+<div class="listContainer">
+    <div class="image-container" data-filters="chocolate australia">
+        <div class="image-wrapper">
+            <img src="rokeby_choc.jpg" alt="Rokeby Chocolate">
+            <div class="description-overlay"><p>Just not a good chocolate flavour. Go for the other Rokeby's.</p></div>
+        </div>
+        <p class="image-title">Rokeby<br>'Dutch Chocolate'</p>
+    </div>
+    <div class="image-container" data-filters="australia">
+        <div class="image-wrapper">
+            <img src="oak_strawberry.jpg" alt="Oak Strawberry">
+            <div class="description-overlay"><p>Very close to being good, but has this weird synthetic taste to it.</p></div>
+        </div>
+        <p class="image-title">OAK<br>'Strawberry'</p>
+    </div>
+    <div class="image-container" data-filters="chocolate australia">
+        <div class="image-wrapper">
+            <img src="oak_plus.jpg" alt="Oak Plus Chocolate">
+            <div class="description-overlay"><p>If you want a protein milk, go Rokeby. If you want a tasty milk, go normal OAK. Rarely is there a reason to buy this one.</p></div>
+        </div>
+        <p class="image-title">OAK<br>'PLUS Chocolate'</p>
+    </div>
+    <div class="image-container" data-filters="chocolate australia">
+        <div class="image-wrapper">
+            <img src="classic_choc.jpg" alt="Classic Chocolate">
+            <div class="description-overlay"><p>Decent. Could use a little bit more sweetness. Only ranked this low because of how good the competition is.</p></div>
+        </div>
+        <p class="image-title">Dairy Farmers<br>'Classic Chocolate'</p>
+    </div>
+    <div class="image-container" data-filters="australia">
+        <div class="image-wrapper">
+            <img src="oak_vanilla.jpg" alt="Oak Vanilla Malt">
+            <div class="description-overlay"><p>Probably my least favourite OAK. Not a trace of vanilla flavour in this.</p></div>
+        </div>
+        <p class="image-title">OAK<br>'Vanilla Malt'</p>
+    </div>
+    <div class="image-container" data-filters="limited-edition australia">
+        <div class="image-wrapper">
+            <img src="bigm_popcorn.jpg" alt="Big M Salted Caramel Popcorn">
+            <div class="description-overlay"><p>Strong salt, weak caramel. They should remove popcorn from the name because there's no taste of popcorn. Rated 7/10 but wouldn't buy again.</p></div>
+        </div>
+        <p class="image-title">Big M<br>'Salted Caramel Popcorn'</p>
+    </div>
+    <div class="image-container" data-filters="international chocolate">
+        <div class="image-wrapper">
+            <img src="darigold_chocolate.jpg" alt="Darigold Chocolate">
+            <div class="description-overlay"><p>Found in Hawaii. Tastes too healty.</p></div>
+        </div>
+        <p class="image-title">Darigold<br>'Chocolate'</p>
+    </div>
+    <div class="image-container" data-filters="limited-edition australia">
+        <div class="image-wrapper">
+            <img src="bigm_blue_heaven.jpg" alt="Big M Blue Heaven">
+            <div class="description-overlay"><p>Kinda tastes like a zooper dooper. Not very strong.</p></div>
+        </div>
+        <p class="image-title">Big M<br>'Blue Heaven'</p>
+    </div>
+    <div class="image-container" data-filters="limited-edition australia">
+        <div class="image-wrapper">
+            <img src="aeroplane_mango.jpg" alt="Aeroplane Mango Jelly">
+            <div class="description-overlay"><p>"Is alright. Tastes sorta like a lolly." - brother Jacob</p></div>
+        </div>
+        <p class="image-title">Aeroplane<br>'Mango Jelly'</p>
+    </div>
+    <div class="image-container" data-filters="limited-edition australia">
+        <div class="image-wrapper">
+            <img src="oak_splice.jpg" alt="Oak Splice Pine Lime">
+            <div class="description-overlay"><p>Surprising tastes exactly like splice. But I don't think milk should taste like an iceblock.</p></div>
+        </div>
+        <p class="image-title">OAK<br>'Splice Pine Lime'</p>
+    </div>
+    <div class="image-container" data-filters="chocolate australia">
+        <div class="image-wrapper">
+            <img src="beanstalk_choc.jpg" alt="Beanstalk chocolate">
+            <div class="description-overlay"><p>Found at Woolies, imported from Vietnam I believe. Milk powder + water based, which I don't like. Really close to ranking this lower but the taste was fine. Just hated the texture.</p></div>
+        </div>
+        <p class="image-title">Beanstalk<br>'Iced Chocolate'</p>
+    </div>
+</div>
+
+<h2>Hall of Shame</h2>
+<p class="subtitle">I do not recommend these at all.</p>
+<div class="listContainer">
+    <div class="image-container" data-filters="chocolate international">
+        <div class="image-wrapper">
+            <img src="yoohoo_choc.png" alt="yoohoo chocolate">
+            <div class="description-overlay"><p>Found in Hawaii. Looks really unappetizing in person too - I was super hesitant to buy it. It's a milk powder + water drink, which immediately I'm less likely to enjoy. And enjoy it I did not.</p></div>
+        </div>
+        <p class="image-title">yoohoo<br>'Chocolate Drink'</p>
+    </div>
+    <div class="image-container" data-filters="chocolate australia">
+        <div class="image-wrapper">
+            <img src="hello_sunshine_dairy.jpg" alt="Hello Sunshine Dairy Chocolate">
+            <div class="description-overlay"><p>Found at Woolies in Canberra. 5 health star rating!!! It tasted horrible. But 5 health star rating!!! Was expensive too.</p></div>
+        </div>
+        <p class="image-title">Hello Sunshine Dairy<br>'Chocolate'</p>
+    </div>
+    <div class="image-container" data-filters="limited-edition australia">
+        <div class="image-wrapper">
+            <img src="classic_banana_split.jpg" alt="Classic Banana Split">
+            <div class="description-overlay"><p>Ranking courtesy of brother Jacob. He rated it a 1/10 and told me not to try it. I trust his judgement. I didn't try it.</p></div>
+        </div>
+        <p class="image-title">Dairy Farmers<br>'Classic Banana Split'</p>
+    </div>
+    <div class="image-container" data-filters="limited-edition australia">
+        <div class="image-wrapper">
+            <img src="aeroplane_lemon.jpg" alt="Aeroplane Lemon Jelly">
+            <div class="description-overlay"><p>Tasted weird.</p></div>
+        </div>
+        <p class="image-title">Aeroplane<br>'Lemon Jelly'</p>
+    </div>
+    <div class="image-container" data-filters="limited-edition australia">
+        <div class="image-wrapper">
+            <img src="zooper-dooper-milk.jpg" alt="Zooper Dooper">
+            <div class="description-overlay"><p>Sold 2021-22. Try to imagine bubblegum flavoured milk. Pineapple flavoured milk.<br>I hope they fired whoever came up with these. Really, really bad.</p></div>
+        </div>
+        <p class="image-title">Zooper Dooper<br>'Raspberry/Bubblegum/Pineapple Flavoured Milk'</p>
+    </div>
+</div>
+
+</body>
