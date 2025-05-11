@@ -58,6 +58,15 @@
         .logo {
             border: 20px outset rgb(255, 65, 65);
         }
+        .logo button { /* Button inside of the logo */
+            position: absolute;
+            top: 10%;/* Adjust as needed */
+            right: 10%; 
+            /* Add any other button styling */
+            font-size: larger;
+            color: rgb(60, 60, 60);
+            padding: 8px 15px;
+        }
         h1 {
             font-family: Impact;
             font-size: 40px;
@@ -105,6 +114,7 @@
 <h1>Lachie Graham's</h1>
 <h3>Not All That Official</h3>
 <h1>Ice Cream Ranking Website</h1>
+<button type="button">See also my<br><a href="ChocolateMilkRankings">Chocolate Milk Ranking</a><br>website!</button>
 </div>
 <!-- <h2>"My opinion is fact and should be treated as such"</h2> -->
  <h2 id="button-group">Filter options
@@ -152,8 +162,8 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <!-- Main chunk of stuff -->
-<h2>The GOAT</h2>
-<p class="subtitle">Will update if I ever find something better</p>
+<h2>GOAT</h2>
+<p class="subtitle">The Lebron James of ice cream.</p>
 <div class="listContainer">
     <div class="image-container" data-filters="chocolate australia">
         <div class="image-wrapper">
@@ -165,7 +175,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 
 <h2>Delicious</h2>
-<p class="subtitle">I'm pretty strict about which ice creams I put in here</p>
+<p class="subtitle">I'm pretty strict about which ice creams I put in here.</p>
 <div class="listContainer">
 
     <div class="image-container" data-filters="chocolate australia">
@@ -175,7 +185,7 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
         <p class="image-title">Bulla<br>'Cookies & Cream'</p>
     </div>
-    <div class="image-container" data-filters="chocolate australia">
+    <div class="image-container" data-filters="gluten-free">
         <div class="image-wrapper">
             <img src="messina-dulce-de-leche.jpg" alt="Messina Dulce De Leche">
             <div class="description-overlay"><p>Dulce de Leche is a milk-caramel sort of thing, and I understand that that may not be everyone's preference. Anyway, great texture, strong flavour with no weird aftertaste. 8/10</p></div>
@@ -189,7 +199,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <p class="subtitle">Most ice creams will go in here. Because most ice creams are good.</p>
 <div class="listContainer">
 
-    <div class="image-container" data-filters="chocolate australia">
+    <div class="image-container" data-filters="gluten-free">
         <div class="image-wrapper">
             <img src="messina-hazelnut-praline.jpg" alt="Messina Hazelnut Praline">
             <div class="description-overlay"><p>Not as good as the hazelnut flavour you can get at the real Messina shops. Still good.</p></div>
@@ -210,14 +220,14 @@ document.addEventListener('DOMContentLoaded', function() {
 <p class="subtitle">I don't really think any ice creams are bad. Some are just worse than others. That's these ones. These are worse than others.</p>
 <div class="listContainer">
 
-    <div class="image-container" data-filters="chocolate australia">
+    <div class="image-container" data-filters="gluten-free">
         <div class="image-wrapper">
             <img src="norco-ult-vanilla.jpg" alt="Norco Ultimate Vanilla">
             <div class="description-overlay"><p>Putting this one low just because this is a "premium" vanilla, but there are "budget" vanillas that taste better.</p></div>
         </div>
         <p class="image-title">Norco<br>'Ultimate Vanilla'</p>
     </div>
-    <div class="image-container" data-filters="chocolate australia">
+    <div class="image-container" data-filters="gluten-free">
         <div class="image-wrapper">
             <img src="norco-honeycomb.jpg" alt="Norco Caramel Choc Honeycomb">
             <div class="description-overlay"><p>Didn't like this one. Had to dilute the taste by doing 1 part this to 1 part chocolate ice cream. Took a while to get through the full 2L.</p></div>
