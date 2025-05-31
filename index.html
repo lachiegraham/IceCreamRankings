@@ -143,31 +143,8 @@ function setButton(clickedButton, filter) {
         }
 
         // modify the GOAT based on filters
-        // gluten-free
-        if (icecreamFilters.includes('isi') && filter === 'all') {
+        if (icecreamFilters.includes('hide-on-all') && filter === 'all') {
             icecream.classList.add('hidden');
-            if (icecreamFilters.includes('isi2')) {
-                icecream.classList.remove('hidden');
-            }
-        }
-        if (icecreamFilters.includes('isi') && filter === 'gluten-free') {
-            icecream.classList.remove('hidden');
-            if (icecreamFilters.includes('isi2')) {
-                icecream.classList.add('hidden');
-            }
-        }
-        // budget
-        if (icecreamFilters.includes('graham') && filter === 'all') {
-            icecream.classList.add('hidden');
-            if (icecreamFilters.includes('graham2')) {
-                icecream.classList.remove('hidden');
-            }
-        }
-        if (icecreamFilters.includes('graham') && filter === 'budget') {
-            icecream.classList.remove('hidden');
-            if (icecreamFilters.includes('graham2')) {
-                icecream.classList.add('hidden');
-            }
         }
     });
 
@@ -203,14 +180,14 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
         <p class="image-title">Norco<br>'Classic Cookie Dough'</p>
     </div>
-    <div class="image-container hidden" data-filters="isi">
+    <div class="image-container hidden" data-filters="gluten-free hide-on-all">
         <div class="image-wrapper">
             <img src="messina-dulce-de-leche.jpg" alt="Messina Dulce De Leche">
             <div class="description-overlay"><p>Shoutout Isi.</p></div>
         </div>
-        <p class="image-title">Bulla<br>'Mint Choc Chip'</p>
+        <p class="image-title">Messina<br>'Dulce De Leche'</p>
     </div>
-    <div class="image-container hidden" data-filters="graham">
+    <div class="image-container hidden" data-filters="budget hide-on-all">
         <div class="image-wrapper">
             <img src="bulla-cookies-cream.jpg" alt="Bulla Cookies & Cream">
             <div class="description-overlay"><p>This one's been my go-to for a little while. Very comforting.</p></div>
@@ -224,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <p class="subtitle">I'm pretty strict about which ice creams I put in here.</p>
 <div class="listContainer">
 
-    <div class="image-container" data-filters="budget graham graham2">
+    <div class="image-container" data-filters="">
         <div class="image-wrapper">
             <img src="bulla-cookies-cream.jpg" alt="Bulla Cookies & Cream">
             <div class="description-overlay"><p>This one's been my go-to for a little while. Very comforting.</p></div>
@@ -244,6 +221,13 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="description-overlay"><p>The best vanilla ice cream you can buy from supermarkets.</p></div>
         </div>
         <p class="image-title">Bulla<br>'Vanilla Bean'</p>
+    </div>
+    <div class="image-container" data-filters="premium">
+        <div class="image-wrapper">
+            <img src="messina-dulce-de-leche.jpg" alt="Messina Dulce De Leche">
+            <div class="description-overlay"><p>Dulce de Leche is a milk-caramel sort of thing, and I understand that that may not be everyone's preference. Anyway, great texture, strong flavour with no weird aftertaste. 8.5/10</p></div>
+        </div>
+        <p class="image-title">Messina<br>'Dulce De Leche'</p>
     </div>
 
 
@@ -284,16 +268,9 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="image-container" data-filters="budget">
         <div class="image-wrapper">
             <img src="much-moore-foursome-choc.jpg" alt="Much Moore Awesome Foursome Cravings">
-            <div class="description-overlay"><p>There's four flavours in here but I'm ranking them as one entity. Flavours are vanilla, choc cookies, choc chip cookie dough, and salted caramel. Overall nothing special, but not bad at all. Would recommend.</p></div>
+            <div class="description-overlay"><p>There's four flavours in here but I'm ranking them as one entity. Flavours are vanilla, choc cookies, choc chip cookie dough, and salted caramel. Overall nothing special, but not bad at all. 7/10.</p></div>
         </div>
         <p class="image-title">Much Moore<br>'Awesome Foursome: Cravings'</p>
-    </div>
-    <div class="image-container" data-filters="gluten-free premium isi isi2">
-        <div class="image-wrapper">
-            <img src="messina-dulce-de-leche.jpg" alt="Messina Dulce De Leche">
-            <div class="description-overlay"><p>Dulce de Leche is a milk-caramel sort of thing, and I understand that that may not be everyone's preference. Anyway, great texture, strong flavour with no weird aftertaste. 8/10</p></div>
-        </div>
-        <p class="image-title">Messina<br>'Dulce De Leche'</p>
     </div>
     <div class="image-container" data-filters="premium">
         <div class="image-wrapper">
