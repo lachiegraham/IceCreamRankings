@@ -229,6 +229,13 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
         <p class="image-title">Messina<br>'Dulce De Leche'</p>
     </div>
+    <div class="image-container" data-filters="premium">
+        <div class="image-wrapper">
+            <img src="ben-jerry-choc-fudge.jpg" alt="Ben & Jerry's Chocolate Fudge Brownie">
+            <div class="description-overlay"><p>Really strong chocolate, kind of tastes like chocolate mousse or like chocolate cake batter. Big fan.</p></div>
+        </div>
+        <p class="image-title">Ben & Jerry's<br>'Chocolate Fudge Brownie'</p>
+    </div>
 
 
 </div>
@@ -323,3 +330,18 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 
 </div>
+<script>
+fetch('https://www.woolworths.com.au/apis/ui/product/detail/48728')
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return response.json();
+  })
+  .then(data => {
+    console.log(data); // Use the JSON data
+  })
+  .catch(error => {
+    console.error('Error fetching data:', error);
+  });
+</script>
