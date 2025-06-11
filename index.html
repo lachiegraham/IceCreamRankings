@@ -173,19 +173,12 @@ document.addEventListener('DOMContentLoaded', function() {
 <h2>GOAT</h2>
 <p class="subtitle">The Lebron James of ice cream.</p>
 <div class="listContainer">
-    <div class="image-container" data-filters="premium">
+    <div class="image-container" data-filters="premium gluten-free">
         <div class="image-wrapper">
-            <img src="norco-cookie.jpg" alt="Norco Classic Cookie Dough">
-            <div class="description-overlay"><p>A delicious vanilla ice cream base, with little brownie pieces and little bits of cookie dough floating about, then drizzled with chocolate sauce. Heaven.</p></div>
+            <img src="messina-pistachio-praline.jpg" alt="Messina Pistachio Praline">
+            <div class="description-overlay"><p>I never really understood the hype behind Messina. The times I bought stuff from their shops I was often disappointed.<br><br>But then this one came along. And it certainly doesn't disappoint.</p></div>
         </div>
-        <p class="image-title">Norco<br>'Classic Cookie Dough'</p>
-    </div>
-    <div class="image-container hidden" data-filters="gluten-free hide-on-all">
-        <div class="image-wrapper">
-            <img src="messina-dulce-de-leche.jpg" alt="Messina Dulce De Leche">
-            <div class="description-overlay"><p>Shoutout Isi.</p></div>
-        </div>
-        <p class="image-title">Messina<br>'Dulce De Leche'</p>
+        <p class="image-title">Messina<br>'Pistachio Praline'</p>
     </div>
     <div class="image-container hidden" data-filters="budget hide-on-all">
         <div class="image-wrapper">
@@ -208,6 +201,13 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
         <p class="image-title">Bulla<br>'Cookies & Cream'</p>
     </div>
+    <div class="image-container" data-filters="premium">
+        <div class="image-wrapper">
+            <img src="norco-cookie.jpg" alt="Norco Classic Cookie Dough">
+            <div class="description-overlay"><p>Formerly the GOAT before Messina started selling in Woolworths. This might still be my favourite. Because I like chocolate.</p></div>
+        </div>
+        <p class="image-title">Norco<br>'Classic Cookie Dough'</p>
+    </div>
     <div class="image-container" data-filters="budget gluten-free">
         <div class="image-wrapper">
             <img src="bulla-choc-chip.jpg" alt="Bulla Choc Chip">
@@ -222,7 +222,7 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
         <p class="image-title">Bulla<br>'Vanilla Bean'</p>
     </div>
-    <div class="image-container" data-filters="premium">
+    <div class="image-container" data-filters="premium gluten-free">
         <div class="image-wrapper">
             <img src="messina-dulce-de-leche.jpg" alt="Messina Dulce De Leche">
             <div class="description-overlay"><p>Dulce de Leche is a milk-caramel sort of thing, and I understand that that may not be everyone's preference. Anyway, great texture, strong flavour with no weird aftertaste. 8.5/10</p></div>
@@ -303,7 +303,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </div>
 
-<h2>Not Good</h2>
+<h2>Less Good</h2>
 <p class="subtitle">I don't really think any ice creams are bad. Some are just worse than others. That's these ones. These are worse than others.</p>
 <div class="listContainer">
 
@@ -328,9 +328,17 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
         <p class="image-title">Norco + Minecraft<br>'Candy Apple Explosion'</p>
     </div>
+    <div class="image-container" data-filters="gluten-free premium">
+        <div class="image-wrapper">
+            <img src="connoisseur-honeycomb-honey.jpg" alt="Connoisseur Honeycomb & Australian Honey">
+            <div class="description-overlay"><p>Just kind of boring. The 'honey' is just sugar syrup. And I guess there's little fake honeycomb pieces in there technically. There's, like, 3 of them.</p></div>
+        </div>
+        <p class="image-title">Connoisseur<br>'Honeycomb & Australian Honey'</p>
+    </div>
 
 </div>
-<script>
+<!-- <script>
+    // fetch('https://www.woolworths.com.au/').then(
 fetch('https://www.woolworths.com.au/apis/ui/product/detail/48728')
   .then(response => {
     if (!response.ok) {
@@ -344,4 +352,4 @@ fetch('https://www.woolworths.com.au/apis/ui/product/detail/48728')
   .catch(error => {
     console.error('Error fetching data:', error);
   });
-</script>
+</script> -->
