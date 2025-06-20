@@ -194,13 +194,6 @@ document.addEventListener('DOMContentLoaded', function() {
 <p class="subtitle">I'm pretty strict about which ice creams I put in here.</p>
 <div class="listContainer">
 
-    <div class="image-container" data-filters="">
-        <div class="image-wrapper">
-            <img src="bulla-cookies-cream.jpg" alt="Bulla Cookies & Cream">
-            <div class="description-overlay"><p>This one's been my go-to for a little while. Very comforting.</p></div>
-        </div>
-        <p class="image-title">Bulla<br>'Cookies & Cream'</p>
-    </div>
     <div class="image-container" data-filters="premium">
         <div class="image-wrapper">
             <img src="norco-cookie.jpg" alt="Norco Classic Cookie Dough">
@@ -211,7 +204,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="image-container" data-filters="budget gluten-free">
         <div class="image-wrapper">
             <img src="bulla-choc-chip.jpg" alt="Bulla Choc Chip">
-            <div class="description-overlay"><p>A really good double chocolate ice cream.</p></div>
+            <div class="description-overlay"><p>A really good double choc ice cream.</p></div>
         </div>
         <p class="image-title">Bulla<br>'Choc Chip'</p>
     </div>
@@ -232,9 +225,16 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="image-container" data-filters="premium">
         <div class="image-wrapper">
             <img src="ben-jerry-choc-fudge.jpg" alt="Ben & Jerry's Chocolate Fudge Brownie">
-            <div class="description-overlay"><p>Really strong chocolate, kind of tastes like chocolate mousse or like chocolate cake batter. Big fan.</p></div>
+            <div class="description-overlay"><p>Really strong chocolate, kind of tastes like chocolate mousse or like chocolate cake batter. Big fan.<br><br>Really tough/dense though - it bent my spoon.</p></div>
         </div>
         <p class="image-title">Ben & Jerry's<br>'Chocolate Fudge Brownie'</p>
+    </div>
+    <div class="image-container" data-filters="premium gluten-free">
+        <div class="image-wrapper">
+            <img src="ben-jerry-phish-food.jpg" alt="Ben & Jerry's Phish Food">
+            <div class="description-overlay"><p>Maybe Ben & Jerry's is just good at chocolate ice cream. This just tastes like a double choc ice cream, although it says there's other stuff like marshmallow in there but I can't taste it.</p></div>
+        </div>
+        <p class="image-title">Ben & Jerry's<br>'Phish Food'</p>
     </div>
 
 
@@ -244,12 +244,12 @@ document.addEventListener('DOMContentLoaded', function() {
 <p class="subtitle">Most ice creams will go in here. Because most ice creams are good.</p>
 <div class="listContainer">
 
-    <div class="image-container" data-filters="gluten-free budget">
+    <div class="image-container" data-filters="">
         <div class="image-wrapper">
-            <img src="bulla-boysenberry.jpg" alt="Bulla Vanilla & Boysenberry">
-            <div class="description-overlay"><p>Thoroughly enjoyed this one. Really good.</p></div>
+            <img src="bulla-cookies-cream.jpg" alt="Bulla Cookies & Cream">
+            <div class="description-overlay"><p>This one's been my go-to for a little while. Very comforting.</p></div>
         </div>
-        <p class="image-title">Bulla<br>'Vanilla & Boysenberry'</p>
+        <p class="image-title">Bulla<br>'Cookies & Cream'</p>
     </div>
     <div class="image-container" data-filters="gluten-free premium">
         <div class="image-wrapper">
@@ -257,6 +257,13 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="description-overlay"><p>Not as good as the hazelnut flavour you can get at the real Messina shops. Still good.</p></div>
         </div>
         <p class="image-title">Messina<br>'Hazelnut Praline'</p>
+    </div>
+    <div class="image-container" data-filters="gluten-free budget">
+        <div class="image-wrapper">
+            <img src="bulla-boysenberry.jpg" alt="Bulla Vanilla & Boysenberry">
+            <div class="description-overlay"><p>Thoroughly enjoyed this one. Really good.</p></div>
+        </div>
+        <p class="image-title">Bulla<br>'Vanilla & Boysenberry'</p>
     </div>
     <div class="image-container" data-filters="premium">
         <div class="image-wrapper">
@@ -321,6 +328,13 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
         <p class="image-title">Norco<br>'Caramel Choc Honeycomb'</p>
     </div>
+    <div class="image-container" data-filters="premium">
+        <div class="image-wrapper">
+            <img src="ben-jerry-tonight-dough.jpg" alt="Ben & Jerry's The Tonight Dough">
+            <div class="description-overlay"><p>Pretty much just putting this low to remind myself to not buy it. It's not bad, there's just way too much going on. I don't need six different flavours competing for my attention in each scoop.</p></div>
+        </div>
+        <p class="image-title">Ben & Jerry's<br>'The Tonight Dough'</p>
+    </div>
     <div class="image-container" data-filters="gluten-free premium">
         <div class="image-wrapper">
             <img src="minecraft-candy-apple.jpg" alt="Norco Minecraft Candy Apple Explosion">
@@ -337,19 +351,3 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 
 </div>
-<!-- <script>
-    // fetch('https://www.woolworths.com.au/').then(
-fetch('https://www.woolworths.com.au/apis/ui/product/detail/48728')
-  .then(response => {
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    return response.json();
-  })
-  .then(data => {
-    console.log(data); // Use the JSON data
-  })
-  .catch(error => {
-    console.error('Error fetching data:', error);
-  });
-</script> -->
