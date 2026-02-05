@@ -2,59 +2,7 @@
 <head>
     <title>Lachie Graham's Ice Cream Rankings</title>
     <style>
-        .listContainer {
-            padding: 0 calc(5vw); /* 5% view width padding */
-            display: flex; /* Use flexbox for horizontal layout */
-            justify-content: center;
-            gap: 20px; /* Space between images */
-            flex-wrap: wrap;
-        }
-        .image-container {
-            display: flex;
-            flex-direction: column; /* Stack image and text vertically */
-            align-items: center; /* Center text below image */
-            text-align: center; /* Center text within its container */
-            position: relative; /* Needed for absolute positioning of the overlay */
-        }
-        .image-wrapper {
-            cursor: pointer; /* Indicate that the container is clickable */
-            position: relative; /* Needed for absolute positioning of the overlay within */
-        }
-        .image-container img {
-            max-width: 200px; /* Adjust image size as needed */
-            height: auto;
-            display: block; /* Prevent extra space below inline elements */
-        }
-        .image-container p.image-title {
-            max-width: 200px;
-            margin-top: 10px; /* Space between image and text */
-        }
-        .description-overlay { /* CLICK ON IMAGE, SHOW TEXT*/
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0; /* Initially hidden */
-            transition: opacity 0.3s ease; /* Smooth fade-in/out */
-            text-align: center;
-            padding: 10px;
-            box-sizing: border-box; /* Include padding in width and height */
-        }
-        .description-overlay p {
-            max-width: 90%; /* Limit text width within the overlay */
-        }
-        .image-wrapper.active .description-overlay {
-            opacity: 1; /* Show the overlay when the container is active */
-        }
-
-
-
+        /* LOGO */
         .logo {
             border: 20px outset rgb(255, 65, 65);
         }
@@ -104,10 +52,54 @@
             display: none;
         }
 
+        /* MAIN */
+        .nav-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .nav-card {
+            text-decoration: none;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            /* border-radius: 15px; */
+            background: white;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.5);
+        }
+
+        .image-wrapper {
+            width: 150px;
+            height: 150px;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-title {
+            margin-top: 15px;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-card:hover { /* clickability */
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+            color: #007bff;
+        }
     </style>
 </head>
 
-<!-- https://www.reddit.com/r/anchorage/comments/1cqxha4/the_chocolate_milk_situation/ -->
 
 <body>
 <div class="logo">
@@ -117,503 +109,152 @@
 <button type="button" onclick="location.href='/ChocolateMilkRankings'">See also my<br><a href="/ChocolateMilkRankings">Chocolate Milk Ranking</a><br>website!</button>
 
 </div>
-<!-- <h2>"My opinion is fact and should be treated as such"</h2> -->
- <h2 id="button-group">Filter options
-<button type="button" onclick="setButton(this, 'all')" disabled="true">All</button>
-<button type="button" onclick="setButton(this, 'budget')">Budget Friendly</button>
-<button type="button" onclick="setButton(this, 'premium')">Premium</button>
-<button type="button" onclick="setButton(this, 'gluten-free')">Gluten Free</button>
-</h2>
-<h4 class="subtitle">(Click on the images to see my opinions)</h4>
-<script>
-function setButton(clickedButton, filter) {
-    const buttons = document.querySelectorAll('#button-group button');
-    const icecreams = document.querySelectorAll('.image-container')
-    
-    // filter
-    icecreams.forEach(icecream => {
-        const icecreamFilters = icecream.dataset.filters;
 
-        if (filter === 'all') {
-            icecream.classList.remove('hidden');
-        } else if (icecreamFilters.includes(filter)) {
-            icecream.classList.remove('hidden');
-        } else {
-            icecream.classList.add('hidden');
-        }
+<h2>Select brand (A-Z)</h1>
+<!-- Navigation -->
+<nav class="nav-container">
+        
+    <a href="/IceCreamRankings/ben-and-jerrys" class="nav-card">
+        <div class="image-wrapper">
+            <img src="ben-jerry-half-baked.jpg" alt="Ben & Jerry's Ice Cream">
+        </div>
+        <span class="nav-title">Ben & Jerry's</span>
+    </a>
 
-        // modify the GOAT based on filters
-        if (icecreamFilters.includes('hide-on-all') && filter === 'all') {
-            icecream.classList.add('hidden');
-        }
-    });
+    <a href="/IceCreamRankings/blue-ribbon" class="nav-card">
+        <div class="image-wrapper">
+            <img src="blue-ribbon-classic-neopolitan.jpg" alt="Blue Ribbon Ice Cream">
+        </div>
+        <span class="nav-title">Blue Ribbon</span>
+    </a>
 
-    // set button clicked to disabled, all others enabled
-    buttons.forEach(button => {
-        if (button === clickedButton) {
-            button.disabled = true;
-        } else {
-            button.disabled = false;
-        }
-    });
-}
-// could technically put all the above stuff in here
-document.addEventListener('DOMContentLoaded', function() {
-    // Handle clicking on images => toggle description
-    const imageWrappers = document.querySelectorAll('.image-wrapper');
-    imageWrappers.forEach(container => {
-        container.addEventListener('click', function() {
-            this.classList.toggle('active');
-        });
-    });
-});
-</script>
+    <a href="/IceCreamRankings/bulla" class="nav-card">
+        <div class="image-wrapper">
+            <img src="bulla-choc-chip.jpg" alt="Bulla Ice Cream">
+        </div>
+        <span class="nav-title">Bulla</span>
+    </a>
 
-<!-- Main chunk of stuff -->
-<h2>GOAT</h2>
-<p class="subtitle">The Lebron James of ice cream.</p>
-<div class="listContainer">
-    <div class="image-container" data-filters="premium gluten-free">
+    <a href="/IceCreamRankings/cadbury" class="nav-card">
         <div class="image-wrapper">
-            <img src="messina-pistachio-praline.jpg" decoding=“async” alt="Messina Pistachio Praline">
-            <div class="description-overlay"><p>I never really understood the hype behind Messina. The times I bought stuff from their shops I was often disappointed.<br><br>But then this one came along. And it certainly doesn't disappoint.</p></div>
+            <img src="cadbury-caramilk.jpg" alt="Cadbury Ice Cream">
         </div>
-        <p class="image-title">Messina<br>'Pistachio Praline'</p>
-    </div>
-    <div class="image-container hidden" data-filters="budget hide-on-all">
-        <div class="image-wrapper">
-            <!-- <img src="" alt="Budget GOAT"> -->
-            <div class="description-overlay"><p>Budget means the tub size must be at least 2L.</p></div>
-        </div>
-        <p class="image-title"></p>
-    </div>
+        <span class="nav-title">Cadbury</span>
+    </a>
 
-</div>
+    <a href="/IceCreamRankings/connoisseur" class="nav-card">
+        <div class="image-wrapper">
+            <img src="connoisseur-cookies-cream.jpg" alt="Connoisseur Ice Cream">
+        </div>
+        <span class="nav-title">Connoisseur</span>
+    </a>
 
-<h2>Delicious</h2>
-<p class="subtitle">I'm pretty strict about which ice creams I put in here.</p>
-<div class="listContainer">
+    <a href="/IceCreamRankings/destination-italy" class="nav-card">
+        <div class="image-wrapper">
+            <img src="destination-italy-choc-hazelnut.jpg" alt="Destination Italy Ice Cream">
+        </div>
+        <span class="nav-title">Destination Italy</span>
+    </a>
 
-    <div class="image-container" data-filters="premium">
+    <a href="/IceCreamRankings/elato" class="nav-card">
         <div class="image-wrapper">
-            <img src="norco-cookie.jpg" decoding=“async” alt="Norco Classic Cookie Dough">
-            <div class="description-overlay"><p>Formerly the GOAT before Messina started selling in Woolworths. This might still be my favourite. Because I like chocolate.</p></div>
+            <img src="elato-triple-vanilla.jpg" alt="Elato Ice Cream">
         </div>
-        <p class="image-title">Norco<br>'Classic Cookie Dough'</p>
-    </div>
-    <div class="image-container" data-filters="budget gluten-free">
-        <div class="image-wrapper">
-            <img src="bulla-choc-chip.jpg" decoding=“async” alt="Bulla Choc Chip">
-            <div class="description-overlay"><p>A really good double choc ice cream.</p></div>
-        </div>
-        <p class="image-title">Bulla<br>'Choc Chip'</p>
-    </div>
-    <div class="image-container" data-filters="premium gluten-free">
-        <div class="image-wrapper">
-            <img src="connoisseur-classic-vanilla.jpg" decoding=“async” alt="Connoisseur Classic Vanilla">
-            <div class="description-overlay"><p>This right here is why Connoisseur can get away with all the random flavours it does. This is perfection. A rich, creamy, vanilla that doesn't taste artificial at all. No faults, no errors. 10/10.</p></div>
-        </div>
-        <p class="image-title">Connoisseur<br>'Classic Vanilla'</p>
-    </div>
-    <div class="image-container" data-filters="premium gluten-free">
-        <div class="image-wrapper">
-            <img src="messina-dulce-de-leche.jpg" decoding=“async” alt="Messina Dulce De Leche">
-            <div class="description-overlay"><p>Dulce de Leche is a milk-caramel sort of thing, and I understand that that may not be everyone's preference. Anyway, great texture, strong flavour with no weird aftertaste. 8.5/10</p></div>
-        </div>
-        <p class="image-title">Messina<br>'Dulce De Leche'</p>
-    </div>
-    <div class="image-container" data-filters="premium">
-        <div class="image-wrapper">
-            <img src="norco-caramel-pecan-pie.jpg" decoding=“async” alt="Norco Caramel Pecan Pie">
-            <div class="description-overlay"><p>A nice relaxed caramel ice cream, not over the top at all. The pecan's are just the right amount of crunchy to add texture but not be annoying. 9/10, maybe even 9.5</p></div>
-        </div>
-        <p class="image-title">Norco<br>'Caramel Pecan Pie'</p>
-    </div>
-    <div class="image-container" data-filters="premium">
-        <div class="image-wrapper">
-            <img src="ben-jerry-choc-fudge.jpg" decoding=“async” alt="Ben & Jerry's Chocolate Fudge Brownie">
-            <div class="description-overlay"><p>Really strong chocolate, kind of tastes like chocolate mousse or like chocolate cake batter. Big fan.<br><br>Really tough/dense though - it bent my spoon.</p></div>
-        </div>
-        <p class="image-title">Ben & Jerry's<br>'Chocolate Fudge Brownie'</p>
-    </div>
-    <div class="image-container" data-filters="premium gluten-free">
-        <div class="image-wrapper">
-            <img src="ben-jerry-phish-food.jpg" decoding=“async” alt="Ben & Jerry's Phish Food">
-            <div class="description-overlay"><p>Maybe Ben & Jerry's is just good at chocolate ice cream. This just tastes like a double choc ice cream, although it says there's other stuff like marshmallow in there but I can't taste it.</p></div>
-        </div>
-        <p class="image-title">Ben & Jerry's<br>'Phish Food'</p>
-    </div>
-    <div class="image-container" data-filters="premium gluten-free">
-        <div class="image-wrapper">
-            <img src="connoisseur-raspberry-white-choc.jpg" decoding=“async” alt="Connoisseur Derwent Valley Raspberry & White Chocolate">
-            <div class="description-overlay"><p>This one's good you'll like it.</p></div>
-        </div>
-        <p class="image-title">Connoisseur<br>'Derwent Valley Raspberry & White Chocolate'</p>
-    </div>
-    <div class="image-container" data-filters="premium gluten-free">
-        <div class="image-wrapper">
-            <img src="haagen-dazs-macadamia-brittle.jpg" decoding=“async” alt="Haagen Dazs Macadamia Nut Brittle">
-            <div class="description-overlay"><p>Brittle is just hardened caramel, so this is caramel macadamia flavour. And thankfully, it's not overly crunchy. The caramel flavour is incredible. The macadamia adds texture. It's great.</p></div>
-        </div>
-        <p class="image-title">Haagen Dazs<br>'Macadamia Nut Brittle'</p>
-    </div>
+        <span class="nav-title">Elato</span>
+    </a>
 
+    <a href="/IceCreamRankings/golden-north" class="nav-card">
+        <div class="image-wrapper">
+            <img src="golden-north-sublime-burst.jpg" alt="Golden North Ice Cream">
+        </div>
+        <span class="nav-title">Golden North</span>
+    </a>
 
-</div>
+    <a href="/IceCreamRankings/haagen-dazs" class="nav-card">
+        <div class="image-wrapper">
+            <img src="haagen-dazs-vanilla.jpg" alt="Haagen-Dazs Ice Cream">
+        </div>
+        <span class="nav-title">Haagen-Dazs</span>
+    </a>
 
-<h2>Good</h2>
-<p class="subtitle">Most ice creams will go in here. Because most ice creams are good.</p>
-<div class="listContainer good">
+    <a href="/IceCreamRankings/maggie-beer" class="nav-card">
+        <div class="image-wrapper">
+            <img src="maggie-beer-choc-salted-caramel.jpg" alt="Maggie Beer Ice Cream">
+        </div>
+        <span class="nav-title">Maggie Beer</span>
+    </a>
 
-    <div class="image-container" data-filters="budget">
+    <a href="/IceCreamRankings/messina" class="nav-card">
         <div class="image-wrapper">
-            <img src="bulla-cookies-cream.jpg" decoding=“async” alt="Bulla Cookies & Cream">
-            <div class="description-overlay"><p>This one's been my go-to for a little while. Very comforting.</p></div>
+            <img src="messina-dulce-de-leche.jpg" alt="Messina Ice Cream">
         </div>
-        <p class="image-title">Bulla<br>'Cookies & Cream'</p>
-    </div>
-    <div class="image-container" data-filters="premium gluten-free">
-        <div class="image-wrapper">
-            <img src="golden-north-sublime-burst.jpg" decoding=“async” alt="Golden North Sublime Burst">
-            <div class="description-overlay"><p>Half vanilla ice cream, half lime sorbet. did we really need this? I say yes absolutely. Tastes very summery and fresh. The vanilla is just there to dilute which is super needed. 7.5/10</p></div>
-        </div>
-        <p class="image-title">Golden North<br>'Twist Sublime Burst'</p>
-    </div>
-    <div class="image-container" data-filters="budget">
-        <div class="image-wrapper">
-            <img src="ben-jerry-triple-caramel.jpg" decoding=“async” alt="Ben & Jerry's Triple Caramel Chunk">
-            <div class="description-overlay"><p>I dunno about triple caramel I don't think that's how caramel works. Tastes very good. The little bits of chocolate are nice. 8/10</p></div>
-        </div>
-        <p class="image-title">Ben & Jerry's<br>'Triple Caramel Chunk'</p>
-    </div>
-    <div class="image-container" data-filters="premium gluten-free">
-        <div class="image-wrapper">
-            <img src="destination-italy-lemon.jpg" decoding=“async” alt="Destination Italy Lemon Italian Gelato">
-            <div class="description-overlay"><p>This is bizarre. It tastes exactly like one of those lemonade icy poles. But it's an ice cream. My brain is confused. Maybe the lemon flavour is slightly stronger here actually, anyway if you like lemon or dislike overly sweet ice cream consider this?</p></div>
-        </div>
-        <p class="image-title">Destination Italy<br>'Lemon'</p>
-    </div>
-    <div class="image-container" data-filters="premium gluten-free">
-        <div class="image-wrapper">
-            <img src="bulla-murray-choc-mint.jpg" decoding=“async” alt="Bulla Murray Street Choc Mint Sundae">
-            <div class="description-overlay"><p>The chocolate is very strong, pretty much dark chocolate, which balances out the mint which is also strong. A really nice combination, I highly recommend this one. 8.5/10</p></div>
-        </div>
-        <p class="image-title">Bulla<br>'Choc Mint Sundae'</p>
-    </div>
-    <div class="image-container" data-filters="gluten-free premium">
-        <div class="image-wrapper">
-            <img src="maggie-beer-burnt-fig.jpg" decoding=“async” alt="Maggie Beer Burnt Fig, Honeycomb & Caramel">
-            <div class="description-overlay"><p>I went into this one expecting to hate it (I've never had a fig before) but surprisingly it's pretty good. If you like figs I'd imagine this could be your new favourite?</p></div>
-        </div>
-        <p class="image-title">Maggie Beer<br>'Burnt Fig, Honeycomb & Caramel'</p>
-    </div>
-    <div class="image-container" data-filters="premium gluten-free">
-        <div class="image-wrapper">
-            <img src="haagen-dazs-vanilla.jpg" decoding=“async” alt="Haagen Dazs Vanilla">
-            <div class="description-overlay"><p>Really strong vanilla, tastes great. Did I say it's strong, because it is. It's really strong. Probably not worth the money in my opinion, but the vanilla flavour is strong.</p></div>
-        </div>
-        <p class="image-title">Haagen Dazs<br>'Vanilla'</p>
-    </div>
-    <div class="image-container" data-filters="premium gluten-free">
-        <div class="image-wrapper">
-            <img src="destination-italy-choc-hazelnut.jpg" decoding=“async” alt="Destination Italy Chocolate Hazelnut Italian Gelato">
-            <div class="description-overlay"><p>This is the best hazelnut ice cream that is sold at supermarkets. Pretty strong on the chocolate so be warned it's not just hazelnut. But yeah it's really good 8.5/10</p></div>
-        </div>
-        <p class="image-title">Destination Italy<br>'Choc Hazelnut'</p>
-    </div>
-    <div class="image-container" data-filters="gluten-free premium">
-        <div class="image-wrapper">
-            <img src="messina-hazelnut-praline.jpg" decoding=“async” alt="Messina Hazelnut Praline">
-            <div class="description-overlay"><p>Not as good as the hazelnut flavour you can get at the real Messina shops. Still good.</p></div>
-        </div>
-        <p class="image-title">Messina<br>'Hazelnut Praline'</p>
-    </div>
-    <div class="image-container" data-filters="budget">
-        <div class="image-wrapper">
-            <img src="ben-jerry-cookie-vermontster.jpg" decoding=“async” alt="Ben & Jerry's Cookie Vermont-ster">
-            <div class="description-overlay"><p>This one is basically just cookie dough ice cream. Chocolate chip cookie dough ice cream. If that sounds good to you, you'll love this. To me it's alright I'm not the biggest fan of cookie dough so 7/10.</p></div>
-        </div>
-        <p class="image-title">Ben & Jerry's<br>'Cookie Vermont-ster'</p>
-    </div>
-    <div class="image-container" data-filters="premium">
-        <div class="image-wrapper">
-            <img src="connoisseur-choc-brownie-custard.jpg" decoding=“async” alt="Connoisseur Chocolate Brownie Custard">
-            <div class="description-overlay"><p>Kind of just a milk chocolate ice cream with a bunch of very little brownie chunks spread throughout. Can't really fault it but not mind blowing in any way. 8/10</p></div>
-        </div>
-        <p class="image-title">Connoisseur<br>'Chocolate Brownie Custard'</p>
-    </div>
-    <div class="image-container" data-filters="premium gluten-free">
-        <div class="image-wrapper">
-            <img src="bulla-murray-vanilla.jpg" decoding=“async” alt="Bulla Vanilla Bean">
-            <div class="description-overlay"><p>Gonna have to buy this again, because it might belong in the delicious tier.</p></div>
-        </div>
-        <p class="image-title">Bulla<br>'Vanilla Bean'</p>
-    </div>
-    <div class="image-container" data-filters="gluten-free budget">
-        <div class="image-wrapper">
-            <img src="bulla-boysenberry.jpg" decoding=“async” alt="Bulla Vanilla & Boysenberry">
-            <div class="description-overlay"><p>Thoroughly enjoyed this one. Really good.</p></div>
-        </div>
-        <p class="image-title">Bulla<br>'Vanilla & Boysenberry'</p>
-    </div>
-    <div class="image-container" data-filters="premium gluten-free">
-        <div class="image-wrapper">
-            <img src="blue-ribbon-classic-neopolitan.jpg" decoding=“async” alt="Blue Ribbon Classic Neapolitan">
-            <div class="description-overlay"><p>I treat this as one flavour, because nobody would go in and just scoop out the vanilla, right? The idea is to get a little bit of everything, right? Well, if you do that, it's good. It's creamy, it's simple, it tastes good.</p></div>
-        </div>
-        <p class="image-title">Blue Ribbon<br>'Classic Neopolitan'</p>
-    </div>
-    <div class="image-container" data-filters="premium">
-        <div class="image-wrapper">
-            <img src="connoisseur-cookies-cream.jpg" decoding=“async” alt="Connoisseur Cookies & Cream">
-            <div class="description-overlay"><p>The ice block version of this is GOAT tier. For whatever reason when they put it in a tub it's just good.</p></div>
-        </div>
-        <p class="image-title">Connoisseur<br>'Cookies & Cream'</p>
-    </div>
-    <div class="image-container" data-filters="gluten-free budget">
-        <div class="image-wrapper">
-            <img src="sara-lee-vanilla.jpg" decoding=“async” alt="Sara Lee Creamy French Vanilla">
-            <div class="description-overlay"><p>Creamy is right! The texture on this is phenomenal. Super soft and creamy. Strong vanilla flavour, a little bit artificial I think but goes great with cake. Not the best, not the worst. 7/10</p></div>
-        </div>
-        <p class="image-title">Sara Lee<br>'Creamy French Vanilla'</p>
-    </div>
-    <div class="image-container" data-filters="gluten-free budget">
-        <div class="image-wrapper">
-            <img src="bulla-vanilla.jpg" decoding=“async” alt="Bulla  Vanilla">
-            <div class="description-overlay"><p>They're right about the 'creamy classics' branding - this is very creamy. It won't make you drop your spoon and say "wow", but it tastes good. 7.5/10</p></div>
-        </div>
-        <p class="image-title">Bulla<br>'Vanilla'</p>
-    </div>
-    <div class="image-container" data-filters="premium gluten-free">
-        <div class="image-wrapper">
-            <img src="cadbury-caramilk.jpg" decoding=“async” alt="Cadbury Caramilk">
-            <div class="description-overlay"><p>I remember trying a block of Caramilk chocolate and not liking it. However, I think this is good. I still don't know what Caramilk actually is. It's kind of white chocolate-ish, but less potent? 7/10</p></div>
-        </div>
-        <p class="image-title">Cadbury<br>'Caramilk'</p>
-    </div>
-    <div class="image-container" data-filters="premium gluten-free">
-        <div class="image-wrapper">
-            <img src="haagen-dazs-mango-raspberry.jpg" decoding=“async” alt="Haagen Dazs Mango & Raspberry">
-            <div class="description-overlay"><p>Ok so I don't really like mangos and this is just mango flavoured ice cream. I can't really taste raspberry. If you like mangos you will probably like this.</p></div>
-        </div>
-        <p class="image-title">Haagen Dazs<br>'Mango & Raspberry'</p>
-    </div>
-    <div class="image-container" data-filters="budget gluten-free">
-        <div class="image-wrapper">
-            <img src="peters-vanilla.jpg" decoding=“async” alt="Peters Original Vanilla">
-            <div class="description-overlay"><p>This is unflavoured ice cream. It is not vanilla flavoured as it suggests. It tastes like nothing. But texture wise this is great. Sprinkle some drinking chocolate on top and enjoy.</p></div>
-        </div>
-        <p class="image-title">Peters<br>'Original Vanilla'</p>
-    </div>
-    <div class="image-container" data-filters="budget">
-        <div class="image-wrapper">
-            <img src="milo.jpg" decoding=“async” alt="Nestle Milo Ice Cream">
-            <div class="description-overlay"><p>If you've had one of the little 'Milo Scoop Shakes' before, this is identical. If you haven't, this is vaguely chocolate flavoured ice cream. That's my best explanation. Not a big fan. 7/10</p></div>
-        </div>
-        <p class="image-title">Nestle<br>'Milo'</p>
-    </div>
-    <div class="image-container" data-filters="budget gluten-free">
-        <div class="image-wrapper">
-            <img src="blue-ribbon-vanilla.jpg" decoding=“async” alt="Blue Ribbon Classic Vanilla">
-            <div class="description-overlay"><p>Pretty much unflavoured ice cream. Texture is really good. This is definitely worth buying, but I would suggest mixing it with cake or brownies or something (or milo).</p></div>
-        </div>
-        <p class="image-title">Blue Ribbon<br>'Classic Vanilla'</p>
-    </div>
-    <div class="image-container" data-filters="premium">
-        <div class="image-wrapper">
-            <img src="connoisseur-black-forest.jpg" decoding=“async” alt="Connoisseur Black Forest">
-            <div class="description-overlay"><p>Does a really good job of replicating black forest cake. Cream flavoured ice cream, with cherry bits and brownie bits, and also chocolate sauce throughout. One of Connoisseur's best. 8.5/10</p></div>
-        </div>
-        <p class="image-title">Connoisseur<br>'Black Forest'</p>
-    </div>
-    <div class="image-container" data-filters="premium gluten-free">
-        <div class="image-wrapper">
-            <img src="violet-crumble.jpg" decoding=“async” alt="Violet Crumble Choc Honeycomb">
-            <div class="description-overlay"><p>The ice cream itself tastes really good. The crunchy bits of honeycomb are a bit too crunchy. Overall 8/10.</p></div>
-        </div>
-        <p class="image-title">Violet Crumble<br>'Choc Honeycomb'</p>
-    </div>
-    <div class="image-container" data-filters="budget">
-        <div class="image-wrapper">
-            <img src="much-moore-foursome-choc.jpg" decoding=“async” alt="Much Moore Awesome Foursome Cravings">
-            <div class="description-overlay"><p>Flavours in here are vanilla, choc cookies, choc chip cookie dough, and salted caramel. Overall nothing special, but not bad at all. 7/10.</p></div>
-        </div>
-        <p class="image-title">Much Moore<br>'Awesome Foursome: Cravings'</p>
-    </div>
-    <div class="image-container" data-filters="budget">
-        <div class="image-wrapper">
-            <img src="much-moore-foursome-family.jpg" decoding=“async” alt="Much Moore Awesome Foursome Family Classic">
-            <div class="description-overlay"><p>Flavours in here are vanilla, chocolate, "groovy gumdrops", and cookies & cream. The groovy gumdrops flavour overpowers any other flavour you scoop out, and it tastes a little weird. Not bad, just weird. 6.5/10.</p></div>
-        </div>
-        <p class="image-title">Much Moore<br>'Awesome Foursome: Family Classic'</p>
-    </div>
-    <div class="image-container" data-filters="premium gluten-free">
-        <div class="image-wrapper">
-            <img src="haagen-dazs-strawberries-cream.jpg" decoding=“async” alt="Haagen Dazs Strawberries & Cream">
-            <div class="description-overlay"><p>A pretty mild strawberry ice cream, but not artificial tasting at all. It has actual strawberries in it, as in little frozen chunks of strawberry, which I'm not a fan of just because they're frozen and therefore crunchy. Good otherwise. 7/10</p></div>
-        </div>
-        <p class="image-title">Haagen Dazs<br>'Strawberries & Cream'</p>
-    </div>
-    <div class="image-container" data-filters="premium">
-        <div class="image-wrapper">
-            <img src="ben-jerry-dulce-delish.jpg" decoding=“async” alt="Ben & Jerry's Dulce De-lish">
-            <div class="description-overlay"><p>As with all Ben & Jerry's, there's a lot going on here, but at it's core this is salted caramel ice cream. There's some chocolate bits to balance it out which is nice, but mostly it's caramel. I think it tastes good. 8/10</p></div>
-        </div>
-        <p class="image-title">Ben & Jerry's<br>'Dulce De-lish'</p>
-    </div>
-    <div class="image-container" data-filters="premium gluten-free">
-        <div class="image-wrapper">
-            <img src="maggie-beer-peanut-butter-choc.png" decoding=“async” alt="Maggie Beer Roasted Peanut Butter & Chocolate Ripple">
-            <div class="description-overlay"><p>I think this is discontinued since I bought it on clearance. Peanut butter as an ice cream flavour is a bit weird to me, but the chocolate really balances it out. Surprisingly decent, 7.5/10</p></div>
-        </div>
-        <p class="image-title">Maggie Beer<br>'Roasted Peanut Butter & Chocolate Ripple'</p>
-    </div>
-    <div class="image-container" data-filters="premium gluten-free">
-        <div class="image-wrapper">
-            <img src="maggie-beer-choc-salted-caramel.jpg" decoding=“async” alt="Maggie Beer Chocolate & Salted Caramel">
-            <div class="description-overlay"><p>Very rich chocolate, maybe even a dark chocolate. The salted caramel is barely noticable but that's fine with me. Texture is great, flavour is strong. 8/10.</p></div>
-        </div>
-        <p class="image-title">Maggie Beer<br>'Chocolate & Salted Caramel'</p>
-    </div>
-    <div class="image-container" data-filters="premium">
-        <div class="image-wrapper">
-            <img src="norco-mango-macadamia.jpg" decoding=“async” alt="Norco Mango Macadamia">
-            <div class="description-overlay"><p>Tastes like mango ice cream, with macadamia nuts in it. The macadamias are fun. The ice cream texture is nice. This is good.</p></div>
-        </div>
-        <p class="image-title">Norco<br>'Mango Macadamia'</p>
-    </div>
-    <div class="image-container" data-filters="premium">
-        <div class="image-wrapper">
-            <img src="ben-jerry-choc-cookie.jpg" decoding=“async” alt="Ben & Jerry's Chocolate Chip Cookie Dough">
-            <div class="description-overlay"><p>Pretty boring. Cookie bits taste good. 7/10</p></div>
-        </div>
-        <p class="image-title">Ben & Jerry's<br>'Chocolate Chip Cookie Dough'</p>
-    </div>
-    <div class="image-container" data-filters="premium">
-        <div class="image-wrapper">
-            <img src="ben-jerry-half-baked.jpg" decoding=“async” alt="Ben & Jerry's Half Baked">
-            <div class="description-overlay"><p>Vanilla + chocolate ice cream with some cookie pieces. Tastes good but nothing special. 7/10</p></div>
-        </div>
-        <p class="image-title">Ben & Jerry's<br>'Half Baked'</p>
-    </div>
-    <div class="image-container" data-filters="premium gluten-free">
-        <div class="image-wrapper">
-            <img src="elato-triple-vanilla.jpg" decoding=“async” alt="Elato Triple Vanilla">
-            <div class="description-overlay"><p>I dunno about triple vanilla, pretty sure there's just one vanilla. This does taste different to other vanilla ice creams, and it's noticably strong in flavour. Sad that it's expensive and small. 8/10.</p></div>
-        </div>
-        <p class="image-title">Elato<br>'Triple Vanilla'</p>
-    </div>
-    <div class="image-container" data-filters="gluten-free premium">
-        <div class="image-wrapper">
-            <img src="connoisseur-honeycomb-honey.jpg" decoding=“async” alt="Connoisseur Honeycomb & Australian Honey">
-            <div class="description-overlay"><p>Tastes good, I'd give it a 7/10, but this should just be called 'Australian Honey' flavour. Like technically there's little fake honeycomb pieces in there. But there's only like 3 of them.</p></div>
-        </div>
-        <p class="image-title">Connoisseur<br>'Honeycomb & Australian Honey'</p>
-    </div>
-    <div class="image-container" data-filters="gluten-free budget">
-        <div class="image-wrapper">
-            <img src="bulla-salted-caramel.jpg" decoding=“async” alt="Bulla Salted Caramel & Vanilla">
-            <div class="description-overlay"><p>Nothing ground-breaking, but tastes good. A little boring I guess but who cares.</p></div>
-        </div>
-        <p class="image-title">Bulla<br>'Salted Caramel & Vanilla'</p>
-    </div>
-    <div class="image-container" data-filters="gluten-free premium">
-        <div class="image-wrapper">
-            <img src="minecraft-bubblegum-burst.jpg" decoding=“async” alt="Norco Minecraft Bubblegum Burst">
-            <div class="description-overlay"><p>It pains me to put this in this tier, but it is good. The ice cream is a nice sweet/sour combo, and theres a big variety of lollies for texture which are my favourite part. I hate that I like this. A reluctant 8/10. </p></div>
-        </div>
-        <p class="image-title">Norco + Minecraft<br>'Bubblegum Burst'</p>
-    </div>
-    <div class="image-container" data-filters="budget gluten-free">
-        <div class="image-wrapper">
-            <img src="bulla-mint-choc.jpg" decoding=“async” alt="Bulla Mint Choc Chip">
-            <div class="description-overlay"><p>One time I ate this with a whisk!</p></div>
-        </div>
-        <p class="image-title">Bulla<br>'Mint Choc Chip'</p>
-    </div>
-    <div class="image-container" data-filters="premium gluten-free">
-        <div class="image-wrapper">
-            <img src="connoisseur-cafe-grande.jpg" decoding=“async” alt="Connoisseur Café Grande">
-            <div class="description-overlay"><p>Look. I didn't really like this one. But that doesn't mean it's bad. It's probably good. I just don't like coffee. And that's okay. I think.</p></div>
-        </div>
-        <p class="image-title">Connoisseur<br>'Café Grande'</p>
-    </div>
-    <div class="image-container" data-filters="budget">
-        <div class="image-wrapper">
-            <img src="norco-classic-vanilla.jpg" decoding=“async” alt="Norco Classic Vanilla">
-            <div class="description-overlay"><p>Texture is a little icy, probably because they used skim milk. Flavour is fine I guess it's not mind blowing. I would say go Peters over this. Contains gluten for some reason.</p></div>
-        </div>
-        <p class="image-title">Norco<br>'Classic Vanilla'</p>
-    </div>
-    <div class="image-container" data-filters="gluten-free premium">
-        <div class="image-wrapper">
-            <img src="maggie-beer-lemon-curd.png" decoding=“async” alt="Maggie Beer Lemon Curd Ripple & Amaretti Biscuit">
-            <div class="description-overlay"><p>I'm not really a fan of this one but it's good. If "lemon curd" ice cream sounds tasty to you, you might like this. Texture and flavours are all good as with all Maggie Beer ice creams.</p></div>
-        </div>
-        <p class="image-title">Maggie Beer<br>'Lemon Curd Ripple & Amaretti Biscuit'</p>
-    </div>
+        <span class="nav-title">Messina</span>
+    </a>
 
-</div>
+    <a href="/IceCreamRankings/milo" class="nav-card">
+        <div class="image-wrapper">
+            <img src="milo.jpg" alt="Milo Ice Cream">
+        </div>
+        <span class="nav-title">Milo</span>
+    </a>
 
-<h2>Less Good</h2>
-<p class="subtitle">I don't really think any ice creams are bad. Some are just worse than others. That's these ones. These are worse than others.</p>
-<div class="listContainer">
+    <a href="/IceCreamRankings/minecraft" class="nav-card">
+        <div class="image-wrapper">
+            <img src="minecraft-candy-apple.jpg" alt="Minecraft Ice Cream">
+        </div>
+        <span class="nav-title">Minecraft</span>
+    </a>
 
-    <div class="image-container" data-filters="premium">
+    <a href="/IceCreamRankings/much-moore" class="nav-card">
         <div class="image-wrapper">
-            <img src="norco-ult-vanilla.jpg" decoding=“async” alt="Norco Ultimate Vanilla">
-            <div class="description-overlay"><p>Putting this one low just because this is a "premium" vanilla, but there are "budget" vanillas that taste better.</p></div>
+            <img src="much-moore-foursome-choc.jpg" alt="Much Moore Ice Cream">
         </div>
-        <p class="image-title">Norco<br>'Ultimate Vanilla'</p>
-    </div>
-    <div class="image-container" data-filters="gluten-free premium">
-        <div class="image-wrapper">
-            <img src="messina-super-flan.jpg" decoding=“async” alt="Messina Super Flan">
-            <div class="description-overlay"><p>Vanilla custard gelato with dulce de leche. It tastes like custard which I find off-putting. People out there probably love this, but it's not for me.</p></div>
-        </div>
-        <p class="image-title">Messina<br>'Super Flan'</p>
-    </div>
-    <div class="image-container" data-filters="budget">
-        <div class="image-wrapper">
-            <img src="norco-honeycomb.jpg" decoding=“async” alt="Norco Caramel Choc Honeycomb">
-            <div class="description-overlay"><p>Didn't like this one. Had to dilute the taste by doing 1 part this to 1 part chocolate ice cream. Took a while to get through the full 2L.</p></div>
-        </div>
-        <p class="image-title">Norco<br>'Caramel Choc Honeycomb'</p>
-    </div>
-    <div class="image-container" data-filters="premium">
-        <div class="image-wrapper">
-            <img src="ben-jerry-tonight-dough.jpg" decoding=“async” alt="Ben & Jerry's The Tonight Dough">
-            <div class="description-overlay"><p>Pretty much just putting this low to remind myself to not buy it. It's not bad, there's just way too much going on. I don't need six different flavours competing for my attention in each scoop.</p></div>
-        </div>
-        <p class="image-title">Ben & Jerry's<br>'The Tonight Dough'</p>
-    </div>
-    <div class="image-container" data-filters="premium gluten-free">
-        <div class="image-wrapper">
-            <img src="connoisseur-mint-cookies.jpg" decoding=“async” alt="Connoisseur Mint & Cookies">
-            <div class="description-overlay"><p>If you're someone who LOVES mint then you might enjoy this. If you're the kind of person who, on occasion, treats themself with some mint chocolate ice cream, you'll think this tastes like toothpaste.</p></div>
-        </div>
-        <p class="image-title">Connoisseur<br>'Mint & Cookies'</p>
-    </div>
-    <div class="image-container" data-filters="gluten-free premium">
-        <div class="image-wrapper">
-            <img src="connoisseur-hazelnut.jpg" decoding=“async” alt="Connoisseur Roasted Hazelnut & Chocolate">
-            <div class="description-overlay"><p>Would be one of the best if it didn't taste so synthetic. Don't know if they used hazelnut extract or what but it has a very stong, unpleasant aftertaste.</p></div>
-        </div>
-        <p class="image-title">Connoisseur<br>'Roasted Hazelnut & Chocolate'</p>
-    </div>
-    <div class="image-container" data-filters="gluten-free premium">
-        <div class="image-wrapper">
-            <img src="minecraft-candy-apple.jpg" decoding=“async” alt="Norco Minecraft Candy Apple Explosion">
-            <div class="description-overlay"><p>Really really sweet. Synthetic apple flavour with popping candy sprinkled throughout. Taste is fine, it's just too sweet. Also it's this toxic looking green colour which is off-putting.</p></div>
-        </div>
-        <p class="image-title">Norco + Minecraft<br>'Candy Apple Explosion'</p>
-    </div>
-    <div class="image-container" data-filters="gluten-free premium">
-        <div class="image-wrapper">
-            <img src="pistachio-papi.jpg" decoding=“async” alt="Pistachio Papi Quattro Pistachio Explosion">
-            <div class="description-overlay"><p>This is (as far as I can tell) the most expensive ice cream in Coles. Holy cow this is strong. Too strong for me. The only way to survive is to dilute this with something else, and even then it's overpowering.</p></div>
-        </div>
-        <p class="image-title">Pistachio Papi<br>'Quattro Pistachio Explosion'</p>
-    </div>
+        <span class="nav-title">Much Moore</span>
+    </a>
 
-</div>
+    <a href="/IceCreamRankings/norco" class="nav-card">
+        <div class="image-wrapper">
+            <img src="norco-caramel-pecan-pie.jpg" alt="Norco Ice Cream">
+        </div>
+        <span class="nav-title">Norco</span>
+    </a>
+
+    <a href="/IceCreamRankings/peters" class="nav-card">
+        <div class="image-wrapper">
+            <img src="peters-vanilla.jpg" alt="Peters Ice Cream">
+        </div>
+        <span class="nav-title">Peters</span>
+    </a>
+
+    <a href="/IceCreamRankings/pistachio-papi" class="nav-card">
+        <div class="image-wrapper">
+            <img src="pistachio-papi.jpg" alt="Pistachio Papi Ice Cream">
+        </div>
+        <span class="nav-title">Pistachio Papi</span>
+    </a>
+
+    <a href="/IceCreamRankings/sara-lee" class="nav-card">
+        <div class="image-wrapper">
+            <img src="sara-lee-vanilla.jpg" alt="Sara Lee Ice Cream">
+        </div>
+        <span class="nav-title">Sara Lee</span>
+    </a>
+
+    <a href="/IceCreamRankings/violet-crumble" class="nav-card">
+        <div class="image-wrapper">
+            <img src="violet-crumble.jpg" alt="Violet Crumble Ice Cream">
+        </div>
+        <span class="nav-title">Violet Crumble</span>
+    </a>
+</nav>
+<!-- <nav class="navigation">
+
+        <a class="brand-section" href="/IceCreamRankings/ben-and-jerrys">
+            <img src="ben-jerry-half-baked.jpg" alt="Ben & Jerry's Logo" width="150">
+            Ben & Jerry's</a>
+
+        <a class="brand-section" href="/IceCreamRankings/bulla">Bulla</a>
+        <a class="brand-section" href="/IceCreamRankings/blue-ribbon">Blue Ribbon</a>
+        <a class="brand-section" href="/IceCreamRankings/connoisseur">Connoisseur</a>
+
+</nav> -->
